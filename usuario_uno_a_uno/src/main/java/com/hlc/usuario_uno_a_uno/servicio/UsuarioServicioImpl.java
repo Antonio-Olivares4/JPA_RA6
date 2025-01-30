@@ -4,9 +4,12 @@ package com.hlc.usuario_uno_a_uno.servicio;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.hlc.usuario_uno_a_uno.entidad.Usuario;
 import com.hlc.usuario_uno_a_uno.repositorio.UsuarioRepositorio;
 
+@Service
 public class UsuarioServicioImpl implements UsuarioServicio {
 
 	
@@ -35,7 +38,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     @Override
     public Usuario obtenerUsuarioPorId(Long id) {
         Optional<Usuario> usuario = usuarioRepositorio.findById(id);
-        return  usuario.orElseThrow(() -> new RuntimeException("No se encuentra el usuario"));
+        return  usuario.orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: "+id));
     }
 
     @Override
