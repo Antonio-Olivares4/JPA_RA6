@@ -1,26 +1,14 @@
 package com.hlc.usuario_uno_a_uno.servicio;
 
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import com.hlc.usuario_uno_a_uno.entidad.Usuario;
 
 public interface UsuarioServicio {
-    
-    /**
-     * Guarda o actualiza un usuario en el sistema.
-     * @param usuario El objeto Usuario a registrar o actualizar.
-     * @return El usuario registrado o actualizado con ID asignado.
-     */
-    Usuario guardarOActualizarUsuario(Usuario usuario);
-    
-    /**
-     * Obtiene un usuario por su ID.
-     * @param id Identificador del usuario.
-     * @return El usuario si existe, de lo contrario, null.
-     */
-    Usuario obtenerUsuarioPorId(Long id);
-    
-    /**
-     * Elimina un usuario del sistema.
-     * @param id Identificador del usuario a eliminar.
-     */
-    void eliminarUsuario(Long id);
+	 Usuario guardarOActualizarUsuario(Usuario usuario);
+	    Usuario obtenerUsuarioPorId(Long id);
+	    void eliminarUsuario(Long id);
+	    Page<Usuario> listarUsuariosPaginados(Pageable pageable);
+	    Page<Usuario> buscarPorNombre(String nombre, Pageable pageable);
 }

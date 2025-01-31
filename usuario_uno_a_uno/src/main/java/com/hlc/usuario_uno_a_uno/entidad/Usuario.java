@@ -9,6 +9,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 
 
@@ -24,9 +25,11 @@ public class Usuario {
     private String username;
     
     @Column(nullable = false)
+    @NotBlank(message = "La contraseña no puede ser nula")
     private String password;
     
-    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Valid
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private InformacionUsuario informacionUsuario;
     
     // Constructor vacío

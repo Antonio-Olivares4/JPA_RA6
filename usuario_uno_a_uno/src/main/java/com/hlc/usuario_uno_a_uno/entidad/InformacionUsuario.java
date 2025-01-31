@@ -1,5 +1,6 @@
 package com.hlc.usuario_uno_a_uno.entidad;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,32 +9,35 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-@Entity
-@Table(name = "informacion_usuarios")
-public class InformacionUsuario {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
+    @Entity
+    @Table(name = "informacion_usuarios")
+    public class InformacionUsuario {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
+
+        @Column(nullable = false, length = 100)
+        @NotBlank(message = "El email no puede estar vacío")
+        @Email(message = "Debe ser un email válido")
+        private String email;
+
+        @Column(nullable = false, length = 15)
+        @NotBlank(message = "El teléfono no puede estar vacío")
+        @Size(min = 8, max = 15, message = "El teléfono debe contener entre 8 y 15 caracteres")
+        private String telefono;
+
+        @OneToOne
+        @JoinColumn(name = "usuario_id", nullable = false)
+        private Usuario usuario; // Esta es la propiedad que debe existir
     
-    @Column(nullable = false, length = 100)
-    @NotBlank(message = "El email no puede estar vacío")
-    @Email(message = "Debe ser un email válido")
-    private String email;
-    
-    @Column(nullable = false, length = 15)
-    @NotBlank(message = "El teléfono no puede estar vacío")
-    @Size(min = 8, max = 15, message = "El teléfono debe contener entre 8 y 15 caracteres")
-    private String telefono;
-    
-    @OneToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuario;
-    
-    // Constructor vacío
+        // Constructor vacío
     public InformacionUsuario() {}
     
     // Constructor con parámetros

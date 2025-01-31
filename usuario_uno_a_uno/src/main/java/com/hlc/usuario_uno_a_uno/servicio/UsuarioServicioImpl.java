@@ -4,6 +4,8 @@ package com.hlc.usuario_uno_a_uno.servicio;
 
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.hlc.usuario_uno_a_uno.entidad.Usuario;
@@ -25,6 +27,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             Optional<Usuario> usuarioExistente = usuarioRepositorio.findById(usuario.getId());
             if (usuarioExistente.isPresent()) {
                 Usuario actualizado = usuarioExistente.get();
+                actualizado.setId(usuario.getId());
                 actualizado.setUsername(usuario.getUsername());
                 actualizado.setPassword(usuario.getPassword());
                 actualizado.setInformacionUsuario(usuario.getInformacionUsuario());
@@ -44,6 +47,16 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     @Override
     public void eliminarUsuario(Long id) {
         usuarioRepositorio.deleteById(id);
+    }
+
+    @Override
+    public Page<Usuario> listarUsuariosPaginados(Pageable pageable) {
+        return usuarioRepositorio.findAll(pageable);
+    }
+
+    @Override
+    public Page<Usuario> buscarPorNombre(String nombre, Pageable pageable) {
+        return usuarioRepositorio.findByUsernameContainingIgnoreCase(nombre, pageable);
     }
 
 
