@@ -6,6 +6,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.OneToOne;
+
+import com.hlc.usuario_uno_a_uno.entidad.enumerado.Rol;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -26,18 +29,28 @@ public class Usuario {
     @Column(nullable = false)
     private String password;
     
+   
+    
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private InformacionUsuario informacionUsuario;
+    
+    @Column(nullable = false)
+    private Rol rol;
     
     // Constructor vacío
     public Usuario() {}
     
     // Constructor con parámetros
-    public Usuario(String username, String password, InformacionUsuario informacionUsuario) {
+    public Usuario(String username, String password, InformacionUsuario informacionUsuario, Rol rol) {
         this.username = username;
         this.password = password;
         this.informacionUsuario = informacionUsuario;
+        this.rol = rol;
     }
+    
+    
+    
+    
     
     // Getters y Setters
     public Long getId() {
@@ -71,4 +84,14 @@ public class Usuario {
     public void setInformacionUsuario(InformacionUsuario informacionUsuario) {
         this.informacionUsuario = informacionUsuario;
     }
+
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
+    
+    
 }

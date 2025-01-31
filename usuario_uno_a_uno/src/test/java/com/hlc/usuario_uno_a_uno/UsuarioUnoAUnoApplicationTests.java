@@ -8,6 +8,6 @@ class UsuarioUnoAUnoApplicationTests {
 
 	@Test
 	void contextLoads() {
+		
 	}
-
 }
