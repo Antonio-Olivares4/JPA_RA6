@@ -29,7 +29,7 @@ public class InicializarDatos implements CommandLineRunner{
 	            InformacionUsuario info2 = new InformacionUsuario("user2@email.com", "87654321");
 	            Usuario usuario2 = new Usuario("user2", "password456", info2, Rol.USER);
 	            info2.setUsuario(usuario2);
-
+	            
 	            usuarioRepositorio.save(usuario2);
 	            
 	            System.out.println("Usuarios insertados en la base de datos.");
